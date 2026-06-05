@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Portofolio AMAM MARWA — Junior Mobile Developer | Kotlin, Android, UI/UX" />
+  <title>AMAM MARWA | Junior Mobile Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #0c1929;
+      --navy-soft: #132337;
+      --gold: #c9a227;
+      --gold-light: #e8d48b;
+      --cream: #faf8f5;
+      --text: #1e293b;
+      --muted: #64748b;
+      --white: #ffffff;
+      --radius: 12px;
+      --shadow: 0 12px 40px rgba(12, 25, 41, 0.12);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: "DM Sans", system-ui, sans-serif;
+      color: var(--text);
+      background: var(--cream);
+      line-height: 1.65;
+    }
+    h1, h2, h3, .logo {
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+    a { color: var(--gold); text-decoration: none; transition: color 0.2s; }
+    a:hover { color: var(--gold-light); }
+    img { max-width: 100%; display: block; }
+
+    .container { max-width: 1080px; margin: 0 auto; padding: 0 1.5rem; }
+
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(12, 25, 41, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(201, 162, 39, 0.2);
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 1.5rem;
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+    .logo { color: var(--white); font-size: 1.35rem; }
+    .logo span { color: var(--gold); }
+    nav { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+    nav a {
+      color: rgba(255,255,255,0.85);
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+    nav a:hover { color: var(--gold); text-decoration: none; }
+
+    /* Hero — background TIDAK boleh ditimpa rule lain */
+    section.hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 6rem 0 4rem;
+      background: linear-gradient(145deg, var(--navy) 0%, #1a3050 50%, var(--navy-soft) 100%) !important;
+      color: #ffffff;
+      position: relative;
+      overflow: hidden;
+    }
+    section.hero::before {
+      content: "";
+      position: absolute;
+      top: -20%; right: -10%;
+      width: 50%;
+      height: 80%;
+      background: radial-gradient(circle, rgba(201,162,39,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 3rem;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+      width: 100%;
+    }
+    @media (max-width: 900px) {
+      .hero-grid { grid-template-columns: 1fr; text-align: center; }
+      .hero-photo-wrap { margin: 0 auto; }
+      .hero-cta { justify-content: center; }
+      .hero-meta { justify-content: center; }
+    }
+    .hero-photo-wrap {
+      position: relative;
+      width: min(420px, 100%);
+    }
+    .hero-photo-wrap::before {
+      content: "";
+      position: absolute;
+      inset: -8px;
+      border: 2px solid var(--gold);
+      border-radius: 16px;
+      opacity: 0.6;
+    }
+    .hero-photo {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      object-position: center top;
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      background: #1a3050;
+    }
+    .badge-role {
+      display: inline-block;
+      background: rgba(201, 162, 39, 0.2);
+      color: var(--gold-light);
+      padding: 0.35rem 1rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      border: 1px solid rgba(201, 162, 39, 0.4);
+    }
+    section.hero h1 {
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      line-height: 1.1;
+      margin-bottom: 0.75rem;
+      color: #ffffff;
+    }
+    section.hero h1 em {
+      font-style: normal;
+      color: var(--gold);
+    }
+    section.hero .hero-tagline {
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.92);
+      max-width: 520px;
+      margin-bottom: 1.5rem;
+    }
+    @media (max-width: 900px) {
+      section.hero .hero-tagline { margin-left: auto; margin-right: auto; }
+    }
+    section.hero .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem 1.5rem;
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 2rem;
+    }
+    section.hero .hero-meta span::before {
+      content: "• ";
+      color: var(--gold);
+    }
+    .hero-cta { display: flex; flex-wrap: wrap; gap: 1rem; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn:hover { transform: translateY(-2px); text-decoration: none; }
+    .btn-primary {
+      background: var(--gold);
+      color: var(--navy);
+    }
+    .btn-primary:hover {
+      color: var(--navy);
+      box-shadow: 0 8px 24px rgba(201,162,39,0.4);
+    }
+    .btn-outline {
+      border: 2px solid rgba(255,255,255,0.5);
+      color: #ffffff;
+    }
+    .btn-outline:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    /* Section umum — JANGAN pakai nth-child(even) */
+    section { padding: 5rem 0; }
+    #tentang,
+    #pengalaman {
+      background: var(--white);
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+    .section-title {
+      font-size: clamp(1.75rem, 3vw, 2.25rem);
+      color: var(--navy);
+      margin-bottom: 2rem;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 2.5rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .about-grid { grid-template-columns: 1fr; }
+    }
+    .about-text p { margin-bottom: 1rem; color: var(--muted); }
+    .highlight-box {
+      background: var(--navy);
+      color: var(--white);
+      padding: 1.75rem;
+      border-radius: var(--radius);
+      border-left: 4px solid var(--gold);
+    }
+    .highlight-box h3 {
+      color: var(--gold-light);
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+    }
+    .highlight-box ul { list-style: none; }
+    .highlight-box li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      font-size: 0.95rem;
+    }
+    .highlight-box li:last-child { border: none; }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .skill-card {
+      background: var(--white);
+      padding: 1.75rem;
+      border-radius: var(--radius);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      border-top: 3px solid var(--gold);
+    }
+    .skill-card h3 {
+      font-size: 1.15rem;
+      color: var(--navy);
+      margin-bottom: 1rem;
+    }
+    .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .tags span {
+      background: var(--cream);
+      color: var(--navy);
+      padding: 0.35rem 0.85rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 1.5rem;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    @media (max-width: 600px) {
+      .timeline-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    }
+    .timeline-date {
+      font-weight: 700;
+      color: var(--gold);
+      font-size: 0.9rem;
+    }
+    .timeline-item h3 {
+      font-size: 1.15rem;
+      color: var(--navy);
+      margin-bottom: 0.35rem;
+    }
+    .timeline-item .org {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+    }
+    .timeline-item p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.75rem;
+    }
+    .project-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform 0.25s;
+    }
+    .project-card:hover { transform: translateY(-6px); }
+    .project-thumb {
+      height: 160px;
+      background: linear-gradient(135deg, var(--navy) 0%, #2a4a6e 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 1.75rem;
+      color: var(--gold-light);
+      letter-spacing: 0.05em;
+    }
+    .project-body { padding: 1.5rem; }
+    .project-body h3 {
+      font-size: 1.25rem;
+      color: var(--navy);
+      margin-bottom: 0.5rem;
+    }
+    .project-body p {
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-bottom: 1rem;
+    }
+    .project-links { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+    .project-links a {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--navy);
+      background: var(--cream);
+      padding: 0.4rem 0.9rem;
+      border-radius: 6px;
+    }
+    .project-links a:hover {
+      background: var(--gold);
+      color: var(--navy);
+      text-decoration: none;
+    }
+
+    .edu-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+    .edu-chips span {
+      background: var(--navy);
+      color: var(--white);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-size: 0.88rem;
+    }
+
+    section.contact {
+      background: var(--navy) !important;
+      color: var(--white);
+      text-align: center;
+      padding: 5rem 1.5rem;
+    }
+    section.contact .section-title { color: var(--white); }
+    section.contact p {
+      color: rgba(255,255,255,0.85);
+      max-width: 560px;
+      margin: 0 auto 2rem;
+    }
+    .contact-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem 2rem;
+      margin-bottom: 2rem;
+    }
+    .contact-links a { color: var(--gold-light); font-weight: 500; }
+    .contact-links a:hover { color: var(--white); }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+      background: var(--cream);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-inner">
+      <div class="logo">AMAM <span>MARWA</span></div>
+      <nav>
+        <a href="#tentang">Tentang</a>
+        <a href="#keahlian">Keahlian</a>
+        <a href="#pengalaman">Pengalaman</a>
+        <a href="#proyek">Proyek</a>
+        <a href="#kontak">Kontak</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-photo-wrap">
+        <img
+          class="hero-photo"
+          src="foto-saya.jpeg"
+          alt="AMAM MARWA — Junior Mobile Developer"
+        />
+      </div>
+      <div class="hero-content">
+        <span class="badge-role">Junior Mobile Developer</span>
+        <h1>AMAM <em>MARWA</em></h1>
+        <p class="hero-tagline">
+          Mahasiswa IT di PeTIK Depok yang fokus pada pengembangan aplikasi Android (Kotlin),
+          integrasi API, dan desain UI/UX yang user-friendly — siap berkontribusi di tim produk digital.
+        </p>
+        <div class="hero-meta">
+          <span>Depok, Jawa Barat</span>
+          <span>marwaamam37@gmail.com</span>
+          <span>+62 823-4110-9785</span>
+        </div>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#kontak">Hubungi Saya</a>
+          <a class="btn btn-outline" href="CV-Amam-Marwa.pdf" download>Unduh CV (PDF)</a>
+          <a class="btn btn-outline" href="https://www.linkedin.com/in/amam-marwa-478007381" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="tentang">
+    <div class="container">
+      <p class="section-label">Profil</p>
+      <h2 class="section-title">Tentang Saya</h2>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>
+            Saya <strong>AMAM MARWA</strong>, mahasiswa di <strong>Pesantren Teknologi Informasi dan Komunikasi (PeTIK) Depok</strong>
+            yang sedang mendalami pengembangan aplikasi mobile dan desain UI/UX.
+          </p>
+          <p>
+            Berpengalaman membangun aplikasi Android menggunakan <strong>Kotlin</strong>, mengelola data dengan
+            <strong>Room/SQLite</strong>, serta menghubungkan layanan melalui <strong>REST API &amp; JSON (Retrofit)</strong>.
+            Terbiasa merancang antarmuka di <strong>Figma</strong> sebelum implementasi di <strong>Android Studio</strong>.
+          </p>
+          <p>
+            Memiliki semangat belajar tinggi, kemampuan <em>problem solving</em>, serta nyaman bekerja
+            secara individu maupun dalam tim — dengan pendekatan berbasis umpan balik dan perbaikan berkelanjutan.
+          </p>
+        </div>
+        <div class="highlight-box">
+          <h3>Pencapaian Utama</h3>
+          <ul>
+            <li>Mengembangkan aplikasi absensi Android (Kotlin) dengan login, pencatatan kehadiran, dan laporan data.</li>
+            <li>Mendesain tampilan aplikasi user-friendly sesuai prinsip UI/UX.</li>
+            <li>Berkolaborasi dalam tim dari perencanaan hingga implementasi.</li>
+            <li>Menyelesaikan beberapa proyek akademik mobile dengan hasil yang baik.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="keahlian">
+    <div class="container">
+      <p class="section-label">Kompetensi</p>
+      <h2 class="section-title">Keahlian</h2>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <h3>Keterampilan Teknis</h3>
+          <div class="tags">
+            <span>Kotlin</span>
+            <span>Java</span>
+            <span>Android SDK</span>
+            <span>Android Studio</span>
+            <span>Room Database</span>
+            <span>SQLite</span>
+            <span>Retrofit</span>
+            <span>REST API &amp; JSON</span>
+            <span>Git &amp; GitHub</span>
+            <span>Figma</span>
+            <span>SQL</span>
+            <span>MongoDB</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <h3>Keterampilan Lunak</h3>
+          <div class="tags">
+            <span>Desain berpusat pada pengguna</span>
+            <span>Pemecahan masalah kreatif</span>
+            <span>Kolaborasi &amp; kerja tim</span>
+            <span>Manajemen waktu</span>
+            <span>Berbasis umpan balik</span>
+            <span>Problem solving</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <h3>Fokus Pengembangan</h3>
+          <div class="tags">
+            <span>Mobile Development</span>
+            <span>UI/UX Design</span>
+            <span>Absensi &amp; keuangan</span>
+            <span>Prototyping</span>
+            <span>Wireframe &amp; mockup</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pengalaman">
+    <div class="container">
+      <p class="section-label">Karier &amp; Pendidikan</p>
+      <h2 class="section-title">Pengalaman &amp; Pendidikan</h2>
+
+      <div class="timeline-item">
+        <div class="timeline-date">Agu 2025 – Apr 2026</div>
+        <div>
+          <h3>Mobile Development (Programming)</h3>
+          <p class="org">Pesantren Teknologi Informasi dan Komunikasi (PeTIK Depok)</p>
+          <p>
+            Fokus pengembangan aplikasi Android dengan Kotlin dan pengelolaan database.
+            Membangun aplikasi <strong>Absensi</strong> dan <strong>Keuangan</strong> di Android Studio,
+            termasuk integrasi data dan antarmuka yang mudah digunakan.
+          </p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-date">Pendidikan</div>
+        <div>
+          <h3>Program IT — PeTIK Depok</h3>
+          <p class="org">Bidang keahlian: Programming &amp; Mobile Development</p>
+          <div class="edu-chips">
+            <span>Kotlin &amp; Java</span>
+            <span>Android Studio</span>
+            <span>REST API &amp; JSON</span>
+            <span>Git &amp; GitHub</span>
+            <span>SQLite</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="proyek">
+    <div class="container">
+      <p class="section-label">Portofolio</p>
+      <h2 class="section-title">Proyek Terpilih</h2>
+      <div class="projects-grid">
+        <article class="project-card">
+          <div class="project-thumb">EATIK</div>
+          <div class="project-body">
+            <h3>Eatik — Pemesanan Makanan &amp; Minuman</h3>
+            <p>
+              Aplikasi mobile untuk memesan makanan dan minuman secara praktis.
+              Antarmuka sederhana dan user-friendly untuk berbagai kalangan pengguna.
+            </p>
+            <div class="project-links">
+              <a href="https://github.com/marwaamam37-cmd/EatikApp" target="_blank" rel="noopener">GitHub</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-thumb">AVENSA</div>
+          <div class="project-body">
+            <h3>Avensa — Absensi Mahasiswa</h3>
+            <p>
+              Solusi absensi digital: pencatatan kehadiran, monitoring real-time,
+              dan histori kehadiran yang rapi dan transparan.
+            </p>
+            <div class="project-links">
+              <a href="https://github.com/utaa-dev/Avensa/tree/amam" target="_blank" rel="noopener">GitHub</a>
+              <a href="https://www.figma.com/design/nsBXeZXM8H7TqgEMyOvoME/Project-Akhir?node-id=0-1" target="_blank" rel="noopener">Figma</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-thumb">WISATA</div>
+          <div class="project-body">
+            <h3>Wireframe &amp; Mockup Aplikasi Wisata</h3>
+            <p>
+              Desain alur dari eksplorasi destinasi, detail lokasi, hingga reservasi.
+              Prototype siap pengembangan dengan prinsip UI/UX yang konsisten.
+            </p>
+            <div class="project-links">
+              <a href="https://www.figma.com/design/LxveIbBvUXmXnX5lM8TSNt/Untitled?node-id=0-1" target="_blank" rel="noopener">Figma</a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="kontak" class="contact">
+    <div class="container">
+      <p class="section-label" style="color: var(--gold-light);">Rekrutmen</p>
+      <h2 class="section-title">Mari Berkenalan</h2>
+      <p>
+        Saya terbuka untuk posisi <strong>Junior Mobile Developer</strong>, magang, atau proyek kolaboratif.
+        Silakan hubungi saya — respons cepat via email atau WhatsApp.
+      </p>
+      <div class="contact-links">
+        <a href="mailto:marwaamam37@gmail.com">marwaamam37@gmail.com</a>
+        <a href="tel:+6282341109785">+62 823-4110-9785</a>
+        <a href="https://wa.me/6282341109785" target="_blank" rel="noopener">WhatsApp</a>
+        <a href="https://www.linkedin.com/in/amam-marwa-478007381" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/marwaamam37-cmd" target="_blank" rel="noopener">GitHub</a>
+      </div>
+      <a class="btn btn-primary" href="mailto:marwaamam37@gmail.com?subject=Lamaran%20-%20AMAM%20MARWA">Kirim Email ke Saya</a>
+    </div>
+  </section>
+  <footer>
+    © 2026 AMAM MARWA · Junior Mobile Developer · Depok, Indonesia
+  </footer>
+</body>
+</html>
