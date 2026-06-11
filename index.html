@@ -57,8 +57,8 @@
       max-width: 1080px;
       margin: 0 auto;
     }
-    .logo { color: var(--white); font-size: 1.35rem; }
-    .logo span { color: var(--gold); }
+    .logo { height: 50px; width: auto; display: flex; align-items: center; }
+    .logo img { max-height: 50px; width: auto; }
     nav { display: flex; gap: 1.5rem; flex-wrap: wrap; }
     nav a {
       color: rgba(255,255,255,0.85);
@@ -387,8 +387,16 @@
       gap: 1rem 2rem;
       margin-bottom: 2rem;
     }
-    .contact-links a { color: var(--gold-light); font-weight: 500; }
-    .contact-links a:hover { color: var(--white); }
+    .contact-links a { 
+      color: var(--gold-light); 
+      font-weight: 500;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+    .contact-links a:hover { 
+      color: var(--white);
+      text-decoration: none;
+    }
 
     footer {
       text-align: center;
@@ -403,7 +411,7 @@
 
   <header>
     <div class="header-inner">
-      <div class="logo">AMAM <span>MARWA</span></div>
+      <div class="logo"><a href="Amama Marwa" alt="AMAM MARWA Logo">AMAM MARWA</a></div>
       <nav>
         <a href="#tentang">Tentang</a>
         <a href="#keahlian">Keahlian</a>
@@ -625,6 +633,7 @@
         <a href="https://wa.me/6282341109785" target="_blank" rel="noopener">WhatsApp</a>
         <a href="https://www.linkedin.com/in/amam-marwa-478007381" target="_blank" rel="noopener">LinkedIn</a>
         <a href="https://github.com/marwaamam37-cmd" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.instagram.com/mrwamma_?igsh=bW9yMmdxdXNqYjBo" target="_blank" rel="noopener">Instagram</a>
       </div>
       <a class="btn btn-primary" href="mailto:marwaamam37@gmail.com?subject=Lamaran%20-%20AMAM%20MARWA">Kirim Email ke Saya</a>
     </div>
